@@ -1,2 +1,2 @@
 job1:
-  - echo "test"
+  script: echo "test"
