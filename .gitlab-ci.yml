@@ -1,2 +1,2 @@
-before_script:
+job1:
   - echo "test"
