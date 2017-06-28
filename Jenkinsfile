@@ -1,21 +1,15 @@
-pipeline {
-    agent any
-
-    stages {
-        stage('Build') {
-            steps {
-                echo 'Building..'
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
-        }
+#!/usr/bin/env groovy
+node('slave') {
+    @Library('jenkins-library') _
+    step([$class: 'WsCleanup'])
+    sshagent(credentials: ['JenkinsDeployKey']) {
+      stage('CHECKOUT') {
+        checkout scm
+      }
+      def _git = new org.jenkins.Git()
+      tagName = _git.getTagName()
+    }
+    stage('Build') {
+      echo 'Tag is: "' + tag + '"'
     }
 }
