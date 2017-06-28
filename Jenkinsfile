@@ -10,6 +10,6 @@ node('slave') {
       tagName = _git.getTagName()
     }
     stage('Build') {
-      echo 'Tag is: "' + tag + '"'
+      echo 'Tag is: "' + tagName + '"'
     }
 }
